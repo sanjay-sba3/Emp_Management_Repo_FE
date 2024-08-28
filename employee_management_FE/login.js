@@ -8,8 +8,8 @@ document.getElementById('user-form').addEventListener('submit', async function(e
         username : name,
         password : password
     };
+    document.getElementById('response-message').textContent = 'Submitting...';
     try {
-        console.log("hello world")
         const response = await fetch('http://127.0.0.1:8000/login/',{
             method: 'POST',
             headers:{
@@ -21,9 +21,9 @@ document.getElementById('user-form').addEventListener('submit', async function(e
 
         if (response.ok){
             const responseData = await response.json();
-            document.getElementById('response-message').textContent = 'Success: '; 
+            document.getElementById('response-message').textContent = 'Success : ' + responseData.message; 
             localStorage.setItem('accessToken', responseData.data.access_token);  
-            console.log("data is " + responseData.data.access_token)
+            console.log(responseData.message)
         }    
         else{
             const errorData = await response.json();
