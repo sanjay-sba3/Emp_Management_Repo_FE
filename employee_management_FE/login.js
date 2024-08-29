@@ -23,7 +23,10 @@ document.getElementById('user-form').addEventListener('submit', async function(e
             const responseData = await response.json();
             document.getElementById('response-message').textContent = 'Success : ' + responseData.message; 
             localStorage.setItem('accessToken', responseData.data.access_token);  
-            console.log(responseData.message)
+            localStorage.setItem('username', responseData.data.username);
+            console.log(responseData.message);
+            // Redirect to user page after successful login
+            window.location.href = 'user.html';  // Replace '/user-page' with the URL of the user page
         }    
         else{
             const errorData = await response.json();
